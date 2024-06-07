@@ -25,7 +25,6 @@ public class UsuarioService {
         Usuario usuario = new Usuario(usuarioDTO);
         usuario.setPessoa(pessoaService.findByCpf(usuarioDTO.getCpf()));
         usuario = repository.save(usuario);
-        usuario.setSenha(null);
         return usuario;
     }
 

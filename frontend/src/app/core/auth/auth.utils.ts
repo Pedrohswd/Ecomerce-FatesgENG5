@@ -18,6 +18,11 @@ export class AuthUtils
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
 
+
+    static getUserRole(): string{
+        const role = this._decodeToken(localStorage.getItem('accessToken'))
+        return role.roles;
+    }
     /**
      * Is token expired?
      *

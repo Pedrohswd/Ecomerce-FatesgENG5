@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { CanMatch, Route, Router, UrlSegment, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, CanMatch, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
 import { AuthService } from 'app/core/auth/auth.service';
+import { AuthUtils } from '../auth.utils';
 
 @Injectable({
     providedIn: 'root'
 })
-export class AuthGuard implements CanMatch
+export class AuthGuard implements CanMatch, CanActivate
 {
     /**
      * Constructor
@@ -17,7 +18,24 @@ export class AuthGuard implements CanMatch
     )
     {
     }
+    canActivate(next: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot): boolean {
 
+        if (this._authService.check()) {
+          // Verifique a ROLE do usuário autenticado
+          const userRole = AuthUtils.getUserRole();
+          // Verifique se a ROLE do usuário permite acessar a rota
+          if (this.checkUserRoleForRoute(userRole, next)) {
+            return true;
+          } else {
+            this._router.navigate(['/unauthorized']); // ou qualquer outra rota para acesso não autorizado
+            return false;
+          }
+        } else {
+          this._router.navigate(['/sing-in']); // redirecionar para o login se não autenticado
+          return false;
+        }
+    }
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
@@ -36,7 +54,13 @@ export class AuthGuard implements CanMatch
     // -----------------------------------------------------------------------------------------------------
     // @ Private methods
     // -----------------------------------------------------------------------------------------------------
-
+    private checkUserRoleForRoute(userRole: string, route: ActivatedRouteSnapshot): boolean {
+        // Obtenha a ROLE necessária para acessar a rota
+        const requiredRole = route.data.requiredRole;
+        console.log(requiredRole)
+        // Verifique se o usuário tem permissão para acessar a rota
+        return userRole === requiredRole;
+      }
     /**
      * Check the authenticated status
      *

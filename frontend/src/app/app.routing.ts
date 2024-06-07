@@ -41,8 +41,8 @@ export const appRoutes: Route[] = [
         path: '',
         canMatch: [AuthGuard],
         component: LayoutComponent,
-        data: {
-            layout: 'empty'
+        resolve: {
+            initialData: InitialDataResolver,
         },
         children: [
             {path: 'sign-out', loadChildren: () => import('app/modules/auth/sign-out/sign-out.module').then(m => m.AuthSignOutModule)},
@@ -67,6 +67,22 @@ export const appRoutes: Route[] = [
         path: '',
         canMatch: [AuthGuard],
         component: LayoutComponent,
+        canActivate: [AuthGuard],
+        data: { requiredRole: 'ROLE_ADMIN' },
+        resolve: {
+            initialData: InitialDataResolver,
+        },
+        children: [
+            {path: 'example', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
+        ]
+    },
+
+    {
+        path: '',
+        canMatch: [AuthGuard],
+        component: LayoutComponent,
+        canActivate: [AuthGuard],
+        data: { requiredRole: 'ROLE_CLIENTE' },
         resolve: {
             initialData: InitialDataResolver,
         },

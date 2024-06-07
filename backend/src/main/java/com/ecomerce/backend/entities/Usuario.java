@@ -24,10 +24,16 @@ public class Usuario {
     public Usuario() {
     }
 
+    public Usuario(Integer id, String email, String senha) {
+        this.id = id;
+        this.email = email;
+        this.senha = senha;
+    }
+
     public Usuario(UsuarioDTO user){
         this.id = user.getId();
         this.email = user.getEmail();
-        //this.senha = user.getSenha();
+        this.senha = user.getSenha();
         this.perfil = user.getPerfil();
     }
 

@@ -1,7 +1,7 @@
 package com.ecomerce.backend.entities.enums;
 
 public enum Perfil {
-    ADMIN(0, "ROLE_ADMIN"), PACIENTE(1, "ROLE_CLIENTE");
+    ADMIN(0, "ROLE_ADMIN"), CLIENTE(1, "ROLE_CLIENTE");
 
     private Integer codigo;
     private String descricao;

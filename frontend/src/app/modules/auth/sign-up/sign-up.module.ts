@@ -11,12 +11,11 @@ import { FuseAlertModule } from '@fuse/components/alert';
 import { SharedModule } from 'app/shared/shared.module';
 import { AuthSignUpComponent } from 'app/modules/auth/sign-up/sign-up.component';
 import { authSignupRoutes } from 'app/modules/auth/sign-up/sign-up.routing';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
-    declarations: [
-        AuthSignUpComponent
-    ],
-    imports     : [
+    declarations: [AuthSignUpComponent],
+    imports: [
         RouterModule.forChild(authSignupRoutes),
         MatButtonModule,
         MatCheckboxModule,
@@ -26,9 +25,8 @@ import { authSignupRoutes } from 'app/modules/auth/sign-up/sign-up.routing';
         MatProgressSpinnerModule,
         FuseCardModule,
         FuseAlertModule,
-        SharedModule
-    ]
+        SharedModule,
+        MatStepperModule,
+    ],
 })
-export class AuthSignUpModule
-{
-}
+export class AuthSignUpModule {}

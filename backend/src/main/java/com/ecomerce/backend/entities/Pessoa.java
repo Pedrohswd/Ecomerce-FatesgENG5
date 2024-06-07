@@ -31,6 +31,16 @@ public class Pessoa {
     private Usuario usuario;
 
 
+    public Pessoa() {
+
+    }
+    public Pessoa(Integer id, String nome, String cpf, String dataNascimento) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+    }
+
     public Pessoa(PessoaDTO obj){
         this.id = obj.getId();
         this.nome = obj.getNome();
@@ -43,6 +53,7 @@ public class Pessoa {
     public Pessoa(String cpf){
             this.cpf = cpf;
     }
+
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
