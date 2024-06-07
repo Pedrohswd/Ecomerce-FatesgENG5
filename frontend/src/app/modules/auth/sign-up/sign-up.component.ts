@@ -72,7 +72,6 @@ export class AuthSignUpComponent implements OnInit {
      */
     ngOnInit(): void {}
 
-    User;
     validaCampos(): boolean {
         const nomePessoaValido = this.pessoaForm.get('nome').valid;
         const cpfPessoaValido = this.pessoaForm.get('cpf').valid;
