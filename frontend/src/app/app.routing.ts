@@ -3,6 +3,7 @@ import { AuthGuard } from 'app/core/auth/guards/auth.guard';
 import { NoAuthGuard } from 'app/core/auth/guards/noAuth.guard';
 import { LayoutComponent } from 'app/layout/layout.component';
 import { InitialDataResolver } from 'app/app.resolvers';
+import { ProdutoListComponent } from './modules/user/produto-list/produto-list.component';
 
 // @formatter:off
 /* eslint-disable max-len */
@@ -46,6 +47,7 @@ export const appRoutes: Route[] = [
         },
         children: [
             {path: 'sign-out', loadChildren: () => import('app/modules/auth/sign-out/sign-out.module').then(m => m.AuthSignOutModule)},
+            {path: 'produtos', component : ProdutoListComponent},
             {path: 'unlock-session', loadChildren: () => import('app/modules/auth/unlock-session/unlock-session.module').then(m => m.AuthUnlockSessionModule)}
         ]
     },
@@ -74,6 +76,7 @@ export const appRoutes: Route[] = [
         },
         children: [
             {path: 'example', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
+            {path: 'ecomerce', loadChildren: () => import('app/modules/admin/ecommerce/ecommerce.module').then(m => m.ECommerceModule)}
         ]
     },
 
@@ -88,6 +91,7 @@ export const appRoutes: Route[] = [
         },
         children: [
             {path: 'example', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
+            {path: 'produto', component: ProdutoListComponent}
         ]
     }
 ];
