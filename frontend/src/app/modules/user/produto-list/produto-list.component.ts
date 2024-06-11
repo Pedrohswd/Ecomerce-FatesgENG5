@@ -55,7 +55,7 @@ export class ProdutoListComponent {
         combineLatest([
             this.filters.categorySlug$,
             this.filters.unidadeSlug$,
-        ]).subscribe(([categorySlug, unidadeSlug]) => {
+        ]).subscribe(([categorySlug]) => {
             // Reset the filtered courses
             this.productsFiltradas = this.products;
 
@@ -99,26 +99,8 @@ export class ProdutoListComponent {
         return item.id || index;
     }
 
-    dias(dia: any) {
-        switch (dia) {
-            case 'MONDAY':
-                return 'Segunda';
-            case 'TUESDAY':
-                return 'Terça';
-            case 'WEDNESDAY':
-                return 'Quarta';
-            case 'THURSDAY':
-                return 'Quinta';
-            case 'FRIDAY':
-                return 'Sexta';
-            case 'SATURDAY':
-                return 'Sábado';
-        }
-        return 'Dia inválido';
-    }
-
     findAll() {
-        this._productService.findAll().subscribe((resposta) => {});
+        this._productService.findAllProducts().subscribe((resposta) => {});
     }
 
     especialidadeJaAdicionada(categoria: string): boolean {

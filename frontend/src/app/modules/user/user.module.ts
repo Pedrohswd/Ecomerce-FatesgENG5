@@ -13,9 +13,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { ProdutoListComponent } from './produto-list/produto-list.component';
 import { FuseCardModule } from '@fuse/components/card';
+import { CompactComponent } from './compact/compact.component';
 
 @NgModule({
-    declarations: [ProdutoListComponent],
+    declarations: [ProdutoListComponent, CompactComponent],
     imports: [
         MatButtonModule,
         MatFormFieldModule,
