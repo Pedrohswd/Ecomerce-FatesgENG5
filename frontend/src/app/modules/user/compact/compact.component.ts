@@ -1,25 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { Carrinho } from 'app/models/carrinho';
+import { CarrinhoItem } from 'app/models/carrinhoItem';
 import { UserService } from 'app/modules/user.service';
 
 @Component({
-  selector: 'app-compact',
-  templateUrl: './compact.component.html',
+    selector: 'app-compact',
+    templateUrl: './compact.component.html',
 })
 export class CompactComponent implements OnInit {
-  carrinho: Carrinho
+    carrinho: CarrinhoItem[] = [];
 
-  constructor(private _userService: UserService) {
-
-  }
+    constructor(private _userService: UserService) {}
+    
     ngOnInit(): void {
-        this._userService.findByIdCarrinho().subscribe((resposta)=> {
-            this.carrinho = resposta
-        })
+        this.carrinho = this._userService.getCarrinho();
     }
 
+    removerItem(produtoId: number): void {
+        this._userService.removeItem(produtoId);
+        this.carrinho = this._userService.getCarrinho();
+    }
 
-  getTotal(): number {
-    return this.carrinho?.items.reduce((acc, item) => acc + (item.produto.price * item.quantidade), 0) || 0;
-  }
+    getTotal(): number {
+        const total = this.carrinho.reduce(
+            (acc, item) => acc + item.produto.price * item.quantidade,
+            0
+        );
+        return parseFloat(total.toFixed(2));
+    }
 }

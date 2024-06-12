@@ -34,7 +34,7 @@
                 <div>+55 552 455 87</div>
             </div>
 
-            <div *ngIf="carrinho" class="grid grid-cols-12 gap-x-1 mt-12">
+            <div *ngIf="carrinho && carrinho.length > 0" class="grid grid-cols-12 gap-x-1 mt-12">
                 <!-- Columns -->
                 <div class="col-span-8 font-medium text-md text-secondary">ITEM</div>
                 <div class="font-medium text-md text-right text-secondary">RATE</div>
@@ -45,7 +45,7 @@
                 <div class="col-span-12 my-4 border-b"></div>
 
                 <!-- Render Items -->
-                <ng-container *ngFor="let item of carrinho?.items">
+                <ng-container *ngFor="let item of carrinho">
                     <div class="col-span-8 text-lg font-medium">{{ item.produto.name }}</div>
                     <div class="self-center text-right">{{ item.produto.price | currency }}</div>
                     <div class="self-center text-right">{{ item.quantidade }}</div>

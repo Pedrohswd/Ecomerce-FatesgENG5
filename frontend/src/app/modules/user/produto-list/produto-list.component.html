@@ -82,7 +82,7 @@
                                         mat-flat-button
                                         class="w-full rounded-none"
                                         [color]="'primary'"
-                                        [routerLink]="[product.id]">
+                                        (click)="adicionarAoCarrinho(product, 1)">
                                         Adicionar ao carrinho
                                     </a>
                                 </div>
