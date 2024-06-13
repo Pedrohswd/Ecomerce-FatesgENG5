@@ -65,25 +65,6 @@ public class DBService {
         usuarioRepository.save(u1);
         usuarioRepository.save(u2);
 
-        // Criar e salvar um carrinho com itens
-        Carrinho carrinho = new Carrinho();
-        carrinho.setNome("Carrinho Exemplo");
-
-        Item item1 = new Item();
-        item1.setProduto(product1);
-        item1.setQuantidade(1);
-        item1.setCarrinho(carrinho);
-
-        Item item2 = new Item();
-        item2.setProduto(product2);
-        item2.setQuantidade(2);
-        item2.setCarrinho(carrinho);
-
-        carrinho.setItems(List.of(item1, item2));
-
-        carrinhoRepository.save(carrinho);
-
-
 
     }
 }

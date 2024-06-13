@@ -14,28 +14,19 @@ public class CarrinhoController {
     @Autowired
     private CarrinhoService carrinhoService;
 
-    @GetMapping("/")
-    public List<Carrinho> findAll(){
-        return this.carrinhoService.findAll();
+    @GetMapping("/usuario/{usuarioEmail}")
+    public Carrinho obterOuCriarCarrinho(@PathVariable String usuarioEmail) {
+        return carrinhoService.findByUser(usuarioEmail);
     }
 
-    @GetMapping("/{id}")
-    public Carrinho findById(@PathVariable Long id){
-        return this.carrinhoService.findById(id);
+    @PostMapping("/{usuarioEmail}/adicionar/{produtoId}")
+    public Carrinho adicionarProduto(@PathVariable String usuarioEmail, @PathVariable Long produtoId, @RequestParam int quantidade) {
+        return carrinhoService.adicionarProduto(usuarioEmail, produtoId, quantidade);
     }
 
-    @PostMapping("/")
-    public Carrinho save(Carrinho carrinho){
-        return this.carrinhoService.save(carrinho);
+    @DeleteMapping("/{carrinhoId}/remover/{produtoId}")
+    public Carrinho removerProduto(@PathVariable Long carrinhoId, @PathVariable Long produtoId) {
+        return carrinhoService.removerProduto(carrinhoId, produtoId);
     }
 
-    @PutMapping("/")
-    public Carrinho update(Carrinho carrinho){
-        return this.carrinhoService.save(carrinho);
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
-        this.carrinhoService.delete(id);
-    }
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthUtils } from 'app/core/auth/auth.utils';
 import { API_CONFIG } from 'app/core/config/API_CONFIG';
 import { Carrinho } from 'app/models/carrinho';
 import { CarrinhoItem } from 'app/models/carrinhoItem';
@@ -72,5 +73,45 @@ export class UserService {
 
     clearCarrinho(): void {
         localStorage.removeItem(this.storageKey);
+    }
+
+    obterOuCriarCarrinho(): Observable<Carrinho> {
+        const emailUser = AuthUtils.getUserEmail();
+        return this._httpClient.get<Carrinho>(
+            `${API_CONFIG.baseUrl}/api/carrinho/usuario/${emailUser}`
+        );
+    }
+
+    adicionarProduto(
+        produtoId: number,
+        quantidade: number
+    ): void {
+        const usuarioEmail = AuthUtils.getUserEmail();
+        this._httpClient.post(
+            `${API_CONFIG.baseUrl}/api/carrinho/${usuarioEmail}/adicionar/${produtoId}`,
+            null,
+            {
+                params: {
+                    quantidade: quantidade.toString()
+                },
+                responseType: 'json'
+            }
+        ).subscribe(
+            response => {
+                console.log('Produto adicionado com sucesso:', response);
+            },
+            error => {
+                console.error('Erro ao adicionar produto:', error);
+            }
+        );
+    }
+
+    removerProduto(
+        produtoId: number
+    ): Observable<Carrinho> {
+        const emailUser = AuthUtils.getUserEmail();
+        return this._httpClient.delete<Carrinho>(
+            `${API_CONFIG.baseUrl}/${emailUser}/api/carrinho/remover/${produtoId}`
+        );
     }
 }

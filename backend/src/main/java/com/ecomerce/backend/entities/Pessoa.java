@@ -25,7 +25,6 @@ public class Pessoa {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
-    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
@@ -50,13 +49,22 @@ public class Pessoa {
         this.setEndereco(endereco);
     }
 
-    public Pessoa(String cpf){
-            this.cpf = cpf;
-    }
-
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "id=" + id +
+                ", cpf='" + cpf + '\'' +
+                ", dataNascimento='" + dataNascimento + '\'' +
+                ", nome='" + nome + '\'' +
+                // Avoid calling toString() on Endereco to prevent circular reference
+                ", enderecoId=" + (endereco != null ? endereco.getId() : null) +
+                ", usuarioId=" + (usuario != null ? usuario.getId() : null) +
+                '}';
     }
 
 }

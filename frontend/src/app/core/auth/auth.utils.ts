@@ -23,6 +23,10 @@ export class AuthUtils
         const role = this._decodeToken(localStorage.getItem('accessToken'))
         return role.roles;
     }
+    static getUserEmail(): string{
+        const role = this._decodeToken(localStorage.getItem('accessToken'))
+        return role.sub;
+    }
     /**
      * Is token expired?
      *

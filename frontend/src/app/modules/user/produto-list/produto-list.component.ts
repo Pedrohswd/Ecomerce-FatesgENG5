@@ -111,8 +111,7 @@ export class ProdutoListComponent {
     }
 
     adicionarAoCarrinho(produto: Product, quantidade: number): void {
-        console.log(produto)
-        this._productService.addItem(produto, quantidade);
+        this._productService.adicionarProduto(produto.id, quantidade);
       }
 
     filterProduct() {

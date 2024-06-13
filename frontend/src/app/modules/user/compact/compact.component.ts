@@ -8,21 +8,40 @@ import { UserService } from 'app/modules/user.service';
     templateUrl: './compact.component.html',
 })
 export class CompactComponent implements OnInit {
-    carrinho: CarrinhoItem[] = [];
+    carrinho: Carrinho;
 
     constructor(private _userService: UserService) {}
-    
+
     ngOnInit(): void {
-        this.carrinho = this._userService.getCarrinho();
+        this._userService.obterOuCriarCarrinho().subscribe(
+            (data) => {
+                this.carrinho = data;
+            },
+            (error) => {
+                console.error('Erro ao obter ou criar carrinho', error);
+            }
+        );
     }
 
     removerItem(produtoId: number): void {
-        this._userService.removeItem(produtoId);
-        this.carrinho = this._userService.getCarrinho();
+        this._userService.removerProduto(produtoId);
+        this._userService.obterOuCriarCarrinho().subscribe(
+            (data) => {
+                this.carrinho = data;
+            },
+            (error) => {
+                console.error('Erro ao obter ou criar carrinho', error);
+            }
+        );
     }
 
+
     getTotal(): number {
-        const total = this.carrinho.reduce(
+        if (!this.carrinho || !this.carrinho.items) {
+            return 0;
+        }
+
+        const total = this.carrinho.items.reduce(
             (acc, item) => acc + item.produto.price * item.quantidade,
             0
         );

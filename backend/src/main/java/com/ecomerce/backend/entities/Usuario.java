@@ -2,11 +2,15 @@ package com.ecomerce.backend.entities;
 
 import com.ecomerce.backend.entities.dtos.UsuarioDTO;
 import com.ecomerce.backend.entities.enums.Perfil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +23,9 @@ public class Usuario {
     private Pessoa pessoa;
     @CollectionTable(name = "PERFIS")
     private Perfil perfil;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "carrinho_id", referencedColumnName = "id")
+    private Carrinho carrinho;
 
 
     public Usuario() {
@@ -41,5 +48,4 @@ public class Usuario {
     public void addPerfil(Perfil perfil) {
         this.perfil = Perfil.toEnum(perfil.getCodigo());
     }
-
 }
