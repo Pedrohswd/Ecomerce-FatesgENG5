@@ -72,8 +72,10 @@ public class CarrinhoService {
 
             if (itemExistente != null) {
                 itemExistente.setQuantidade(itemExistente.getQuantidade() + quantidade);
-            } else {
-                // Adicionar novo item ao carrinho
+                if(itemExistente.getQuantidade() <= 0){
+                    removerProduto(carrinho.getId(), itemExistente.getProduto().getId());
+                }
+            } else if(quantidade > 0) {
                 Item novoItem = new Item();
                 novoItem.setProduto(produto);
                 novoItem.setQuantidade(quantidade);

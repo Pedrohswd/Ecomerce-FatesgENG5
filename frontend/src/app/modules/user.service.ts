@@ -1,10 +1,11 @@
+import { Carrinho } from './../models/carrinho';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { API_CONFIG } from 'app/core/config/API_CONFIG';
-import { Carrinho } from 'app/models/carrinho';
 import { CarrinhoItem } from 'app/models/carrinhoItem';
 import { Product } from 'app/models/product';
+import { Toast, ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 
 @Injectable({
@@ -45,36 +46,6 @@ export class UserService {
             );
     }
 
-    getCarrinho(): CarrinhoItem[] {
-        const carrinho = localStorage.getItem(this.storageKey);
-        return carrinho ? JSON.parse(carrinho) : [];
-    }
-
-    addItem(produto: Product, quantidade: number): void {
-        const carrinho = this.getCarrinho();
-        const itemExistente = carrinho.find(
-            (item) => item.produto.id === produto.id
-        );
-
-        if (itemExistente) {
-            itemExistente.quantidade += quantidade;
-        } else {
-            carrinho.push({ produto, quantidade });
-        }
-
-        localStorage.setItem(this.storageKey, JSON.stringify(carrinho));
-    }
-
-    removeItem(produtoId: number): void {
-        let carrinho = this.getCarrinho();
-        carrinho = carrinho.filter((item) => item.produto.id !== produtoId);
-        localStorage.setItem(this.storageKey, JSON.stringify(carrinho));
-    }
-
-    clearCarrinho(): void {
-        localStorage.removeItem(this.storageKey);
-    }
-
     obterOuCriarCarrinho(): Observable<Carrinho> {
         const emailUser = AuthUtils.getUserEmail();
         return this._httpClient.get<Carrinho>(
@@ -82,36 +53,26 @@ export class UserService {
         );
     }
 
-    adicionarProduto(
-        produtoId: number,
-        quantidade: number
-    ): void {
+    adicionarProduto(produtoId: number, quantidade: number): void {
         const usuarioEmail = AuthUtils.getUserEmail();
-        this._httpClient.post(
-            `${API_CONFIG.baseUrl}/api/carrinho/${usuarioEmail}/adicionar/${produtoId}`,
-            null,
-            {
-                params: {
-                    quantidade: quantidade.toString()
+        this._httpClient
+            .post<Carrinho>(
+                `${API_CONFIG.baseUrl}/api/carrinho/${usuarioEmail}/adicionar/${produtoId}`,
+                null,
+                {
+                    params: {
+                        quantidade: quantidade.toString(),
+                    },
+                    responseType: 'json',
+                }
+            )
+            .subscribe(
+                (response) => {
+                    console.log('Produto adicionado com sucesso:', response);
                 },
-                responseType: 'json'
-            }
-        ).subscribe(
-            response => {
-                console.log('Produto adicionado com sucesso:', response);
-            },
-            error => {
-                console.error('Erro ao adicionar produto:', error);
-            }
-        );
-    }
-
-    removerProduto(
-        produtoId: number
-    ): Observable<Carrinho> {
-        const emailUser = AuthUtils.getUserEmail();
-        return this._httpClient.delete<Carrinho>(
-            `${API_CONFIG.baseUrl}/${emailUser}/api/carrinho/remover/${produtoId}`
-        );
+                (error) => {
+                    console.error('Erro ao adicionar produto:', error);
+                }
+            );
     }
 }

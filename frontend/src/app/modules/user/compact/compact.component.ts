@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Carrinho } from 'app/models/carrinho';
 import { CarrinhoItem } from 'app/models/carrinhoItem';
+import { Product } from 'app/models/product';
 import { UserService } from 'app/modules/user.service';
 
 @Component({
@@ -23,8 +24,9 @@ export class CompactComponent implements OnInit {
         );
     }
 
-    removerItem(produtoId: number): void {
-        this._userService.removerProduto(produtoId);
+    adicionarAoCarrinho(produto: Product, quantidade: number): void {
+        this._userService.adicionarProduto(produto.id, quantidade);
+        
         this._userService.obterOuCriarCarrinho().subscribe(
             (data) => {
                 this.carrinho = data;
@@ -34,7 +36,6 @@ export class CompactComponent implements OnInit {
             }
         );
     }
-
 
     getTotal(): number {
         if (!this.carrinho || !this.carrinho.items) {

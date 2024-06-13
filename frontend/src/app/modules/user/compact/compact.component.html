@@ -3,14 +3,7 @@
       <div class="w-240 p-16 rounded-2xl shadow bg-card print:w-auto print:rounded-none print:shadow-none print:bg-transparent">
         <div class="flex items-start justify-between">
           <div class="grid grid-cols-2 gap-x-4 gap-y-1">
-            <div class="text-4xl tracking-tight text-secondary">INVOICE</div>
-            <div class="text-4xl">#9-0004</div>
-            <div class="font-medium tracking-tight text-secondary">INVOICE DATE</div>
-            <div class="font-medium">Jul 19, 2022</div>
-            <div class="font-medium tracking-tight text-secondary">DUE DATE</div>
-            <div class="font-medium">Aug 19, 2022</div>
-            <div class="font-medium tracking-tight text-secondary">TOTAL DUE</div>
-            <div class="font-medium">$235,000.00</div>
+            <div class="text-4xl tracking-tight text-secondary">CARRINHO</div>
           </div>
           <div class="grid auto-cols-max grid-flow-col gap-x-8 -mr-16 py-6 px-8 rounded-l-2xl bg-accent dark">
             <div class="place-self-center w-24">
@@ -34,10 +27,10 @@
           <div>+55 552 455 87</div>
         </div>
   
-        <div *ngIf="carrinho && carrinho.items.length > 0" class="grid grid-cols-12 gap-x-1 mt-12">
+        <div *ngIf="carrinho" class="grid grid-cols-12 gap-x-1 mt-12">
           <!-- Columns -->
           <div class="col-span-8 font-medium text-md text-secondary">ITEM</div>
-          <div class="font-medium text-md text-right text-secondary">RATE</div>
+          <div class="font-medium text-md text-right text-secondary">VALOR</div>
           <div class="font-medium text-md text-right text-secondary">QTY</div>
           <div class="col-span-2 font-medium text-md text-right text-secondary">TOTAL</div>
   
@@ -49,9 +42,9 @@
             <div class="col-span-8 text-lg font-medium">{{ item.produto.name }}</div>
             <div class="self-center text-right">{{ item.produto.price | currency }}</div>
             <div class="self-center text-right flex items-center justify-center">
-                <button (click)="decreaseQuantity(item)" class="px-2 py-1 bg-red-500 text-white rounded">-</button>
+                <button (click)="adicionarAoCarrinho(item.produto, -1)" class="px-2 py-1 bg-red-500 text-white rounded">-</button>
                 <span class="mx-2">{{ item.quantidade }}</span>
-                <button (click)="increaseQuantity(item)" class="px-2 py-1 bg-green-500 text-white rounded">+</button>
+                <button (click)="adicionarAoCarrinho(item.produto, 1)" class="px-2 py-1 bg-green-500 text-white rounded">+</button>
             </div>
             <div class="col-span-2 self-center text-right">{{ (item.produto.price * item.quantidade) | currency }}</div>
   
@@ -83,16 +76,15 @@
           <div class="col-span-10 self-center text-2xl font-medium tracking-tight text-secondary">TOTAL</div>
           <div class="col-span-2 text-right text-2xl font-medium">R$ {{ getTotal() }}</div>
         </div>
-  
         <div class="mt-16">
-          <div class="font-medium">Please pay within 15 days. Thank you for your business.</div>
+          <div class="font-medium">Clique para realizar o pedido</div>
           <div class="flex items-start mt-4">
-            <img class="flex-0 w-10 mt-2" src="assets/images/logo/logo.svg">
-            <div class="ml-6 text-sm text-secondary">
-              In condimentum malesuada efficitur. Mauris volutpat placerat auctor. Ut ac congue dolor. Quisque scelerisque lacus sed feugiat fermentum.
-              Cras aliquet facilisis pellentesque. Nunc hendrerit quam at leo commodo, a suscipit tellus dapibus. Etiam at felis volutpat est mollis lacinia.
-              Mauris placerat sem sit amet velit mollis, in porttitor ex finibus. Proin eu nibh id libero tincidunt lacinia et eget.
-            </div>
+                <a
+                    mat-flat-button
+                    class="w-full rounded-none"
+                    [color]="'primary'">
+                    Realizar pedido
+                </a>
           </div>
         </div>
       </div>

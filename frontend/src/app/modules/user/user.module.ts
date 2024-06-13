@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProdutoListComponent } from './produto-list/produto-list.component';
 import { FuseCardModule } from '@fuse/components/card';
 import { CompactComponent } from './compact/compact.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
     declarations: [ProdutoListComponent, CompactComponent],
@@ -30,6 +31,7 @@ import { CompactComponent } from './compact/compact.component';
         FuseCardModule,
         FuseFindByKeyPipeModule,
         SharedModule,
+        ToastrModule
     ],
 })
 export class UserModule {}

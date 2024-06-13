@@ -112,7 +112,7 @@ export class ProdutoListComponent {
 
     adicionarAoCarrinho(produto: Product, quantidade: number): void {
         this._productService.adicionarProduto(produto.id, quantidade);
-      }
+    }
 
     filterProduct() {
         this.filteredProductCategoria = [];
