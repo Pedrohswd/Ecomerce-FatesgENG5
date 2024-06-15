@@ -125,7 +125,7 @@ export class InventoryListComponent
         // Create the selected product form
         this.selectedProductForm = this._formBuilder.group({
             id: [''],
-            category: [''],
+            categoria: [''],
             name: ['', [Validators.required]],
             quantity: [''],
             price: [''],
