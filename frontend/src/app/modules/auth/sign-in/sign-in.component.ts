@@ -75,7 +75,7 @@ export class AuthSignInComponent implements OnInit {
         // Sign in
         this._authService.signIn(this.signInForm.value).subscribe(
             () => {
-                this._router.navigateByUrl('example');
+                this._router.navigateByUrl('produtos');
             },
             (response) => {
                 // Re-enable the form

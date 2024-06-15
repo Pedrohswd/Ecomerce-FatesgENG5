@@ -1,5 +1,4 @@
 import { FormGroup } from "@angular/forms";
-import { Unidade } from "./unidade";
 
 
 export class Usuario {

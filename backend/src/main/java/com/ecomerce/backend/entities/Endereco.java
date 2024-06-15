@@ -45,4 +45,19 @@ public class Endereco {
         this.cep = endereco.getCep();
         this.numero = endereco.getNumero();
     }
+
+    @Override
+    public String toString() {
+        return "Endereco{" +
+                "id=" + id +
+                ", bairro='" + bairro + '\'' +
+                ", cep='" + cep + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", complemento='" + complemento + '\'' +
+                ", numero='" + numero + '\'' +
+                ", rua='" + rua + '\'' +
+                // Avoid calling toString() on Pessoa to prevent circular reference
+                ", pessoaId=" + (pessoa != null ? pessoa.getId() : null) +
+                '}';
+    }
 }

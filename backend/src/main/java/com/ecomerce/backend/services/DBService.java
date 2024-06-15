@@ -1,14 +1,8 @@
 package com.ecomerce.backend.services;
 
-import com.ecomerce.backend.entities.Endereco;
-import com.ecomerce.backend.entities.Pessoa;
-import com.ecomerce.backend.entities.Product;
-import com.ecomerce.backend.entities.Usuario;
+import com.ecomerce.backend.entities.*;
 import com.ecomerce.backend.entities.enums.Perfil;
-import com.ecomerce.backend.repositories.EnderecoRepository;
-import com.ecomerce.backend.repositories.PessoaRepository;
-import com.ecomerce.backend.repositories.ProductRepository;
-import com.ecomerce.backend.repositories.UsuarioRepository;
+import com.ecomerce.backend.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.DayOfWeek;
 import java.util.Base64;
+import java.util.List;
 
 @Service
 public class DBService {
@@ -35,6 +30,9 @@ public class DBService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private CarrinhoRepository carrinhoRepository;
 
     @Autowired
     private DataSource dataSource;
@@ -66,8 +64,6 @@ public class DBService {
 
         usuarioRepository.save(u1);
         usuarioRepository.save(u2);
-
-
 
     }
 }
