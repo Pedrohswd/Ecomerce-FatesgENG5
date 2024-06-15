@@ -12,6 +12,8 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import { ToastrModule } from 'ngx-toastr';
+import { UserModule } from './modules/user/user.module';
+import { PedidosFeitosListComponent } from './modules/admin/pedidos-feitos-list/pedidos-feitos-list.component';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -20,7 +22,7 @@ const routerConfig: ExtraOptions = {
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
     ],
     imports     : [
         BrowserModule,
@@ -39,6 +41,7 @@ const routerConfig: ExtraOptions = {
 
         // Core module of your application
         CoreModule,
+        UserModule,
 
         // Layout module of your application
         LayoutModule

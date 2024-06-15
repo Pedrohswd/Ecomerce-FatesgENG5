@@ -1,0 +1,110 @@
+<div
+    class="absolute inset-0 flex flex-col min-w-0 overflow-y-auto"
+    cdkScrollable>
+
+    <!-- Header -->
+    <div class="relative flex-0 py-8 px-4 sm:p-16 overflow-hidden bg-gray-800 dark">
+        <!-- Background - @formatter:off -->
+        <!-- Rings -->
+        <svg class="absolute inset-0 pointer-events-none"
+             viewBox="0 0 960 540" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+            <g class="text-gray-700 opacity-25" fill="none" stroke="currentColor" stroke-width="100">
+                <circle r="234" cx="196" cy="23"></circle>
+                <circle r="234" cx="790" cy="491"></circle>
+            </g>
+        </svg>
+        <!-- @formatter:on -->
+        <div class="z-10 relative flex flex-col items-center">
+            <h2 class="text-xl font-semibold">Loja de Jóias</h2>
+            <div class="mt-1 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight text-center">
+                Compra pô, é o seu lazer..
+            </div>
+            <div class="max-w-2xl mt-6 sm:text-2xl text-center tracking-tight text-secondary">
+                Confia
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex flex-auto p-6 sm:p-10">
+
+        <div class="flex flex-col flex-auto w-full max-w-xs sm:max-w-5xl mx-auto">
+            <!-- Filters -->
+            <div class="flex flex-col sm:flex-row items-center justify-start w-full max-w-xs sm:max-w-none">
+                <mat-form-field
+                    class="w-full ml-2 sm:w-36"
+                    [subscriptSizing]="'dynamic'">
+                    <mat-label>Categorias de produtos</mat-label>
+                    <mat-select
+                        [value]="'all'"
+                        (selectionChange)="filterByCategory($event)">
+                        <mat-option [value]="'all'">Todas</mat-option>
+                        <ng-container *ngFor="let product of filteredProductCategoria ;">
+                            <mat-option [value]="product">{{product.categoria}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+              </div>
+            <!-- Courses -->
+            <ng-container *ngIf="this.productsFiltradas; else noCourses">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 sm:mt-10">
+                    <ng-container *ngFor="let product of productsFiltradas; trackBy: trackByFn">
+                        <fuse-card class="flex flex-col max-w-80 w-full filter-shopping">
+                            <div class="relative">
+                                <div class="absolute flex flex-col top-0 right-0 p-3">
+                                    <button mat-icon-button>
+                                        <mat-icon
+                                            class="icon-size-5 text-white text-opacity-50"
+                                            [svgIcon]="'heroicons_solid:heart'"></mat-icon>
+                                    </button>
+                                    <button mat-icon-button>
+                                        <mat-icon
+                                            class="icon-size-5 text-white text-opacity-50"
+                                            [svgIcon]="'heroicons_solid:switch-horizontal'"></mat-icon>
+                                    </button>
+                                </div>
+                                <img
+                                    class="object-cover"
+                                    [src]="'assets/images/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg'"
+
+                                    alt="Card cover image">
+                            </div>
+                            <div class="m-8 mb-0">
+                                <div class="flex flex-col">
+                                    <div class="text-2xl leading-tight">{{product.categoria}}</div>
+                                    <div class="text-3xl font-semibold mt-2">{{product.name}}</div>
+                                    <div class="text-2x6 leading-tight">Descrição: {{product.description}}</div>
+                                </div>
+                                <hr class="border-b my-6">
+                                <div class="text-5x2 font-extrabold mt-2">R${{product.price}}</div>
+                                <div class="mt-6 -mx-8">
+                                    <a
+                                        mat-flat-button
+                                        class="w-full rounded-none"
+                                        [color]="'primary'"
+                                        (click)="adicionarAoCarrinho(product, 1)">
+                                        Adicionar ao carrinho
+                                    </a>
+                                </div>
+                            </div>
+                        </fuse-card>
+                    </ng-container>
+                </div>
+            </ng-container>
+            
+
+
+            <!-- No courses -->
+            <ng-template #noCourses>
+                <div class="flex flex-auto flex-col items-center justify-center bg-gray-100 dark:bg-transparent">
+                    <mat-icon
+                        class="icon-size-24"
+                        [svgIcon]="'heroicons_outline:document-search'"></mat-icon>
+                    <div class="mt-6 text-2xl font-semibold tracking-tight text-secondary">Sem consultas encontradas!</div>
+                </div>
+            </ng-template>
+        </div>
+
+    </div>
+
+</div>
