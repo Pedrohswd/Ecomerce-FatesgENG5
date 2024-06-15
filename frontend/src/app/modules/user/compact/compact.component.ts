@@ -37,6 +37,10 @@ export class CompactComponent implements OnInit {
         );
     }
 
+    realizarPedido(){
+        this._userService.gerarPedido()
+    }
+
     getTotal(): number {
         if (!this.carrinho || !this.carrinho.items) {
             return 0;

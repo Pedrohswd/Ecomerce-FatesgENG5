@@ -21,6 +21,9 @@ export class AuthUtils
 
     static getUserRole(): string{
         const role = this._decodeToken(localStorage.getItem('accessToken'))
+        if(role == null){
+            return null;
+        }
         return role.roles;
     }
     static getUserEmail(): string{

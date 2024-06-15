@@ -15,9 +15,13 @@ import { ProdutoListComponent } from './produto-list/produto-list.component';
 import { FuseCardModule } from '@fuse/components/card';
 import { CompactComponent } from './compact/compact.component';
 import { ToastrModule } from 'ngx-toastr';
+import { PedidoListComponent } from './pedido-list/pedido-list.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { PedidosFeitosListComponent } from '../admin/pedidos-feitos-list/pedidos-feitos-list.component';
 
 @NgModule({
-    declarations: [ProdutoListComponent, CompactComponent],
+    declarations: [ProdutoListComponent, CompactComponent, PedidoListComponent, PedidosFeitosListComponent],
     imports: [
         MatButtonModule,
         MatFormFieldModule,
@@ -31,7 +35,10 @@ import { ToastrModule } from 'ngx-toastr';
         FuseCardModule,
         FuseFindByKeyPipeModule,
         SharedModule,
-        ToastrModule
+        ToastrModule,
+        MatPaginatorModule,
+        MatTableModule
+
     ],
 })
 export class UserModule {}

@@ -3,6 +3,8 @@ import { MatSelectChange } from '@angular/material/select';
 import { Product } from 'app/models/product';
 import { BehaviorSubject, Subject, combineLatest, takeUntil } from 'rxjs';
 import { UserService } from 'app/modules/user.service';
+import { AuthUtils } from 'app/core/auth/auth.utils';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-produto-list',
@@ -28,7 +30,8 @@ export class ProdutoListComponent {
      */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
-        private _productService: UserService
+        private _productService: UserService,
+        private _router: Router
     ) {}
 
     // -----------------------------------------------------------------------------------------------------
@@ -111,7 +114,11 @@ export class ProdutoListComponent {
     }
 
     adicionarAoCarrinho(produto: Product, quantidade: number): void {
-        this._productService.adicionarProduto(produto.id, quantidade);
+        if (AuthUtils.getUserRole() == null) {
+            this._router.navigate(['sign-in']);
+        } else if (AuthUtils.getUserRole() == 'ROLE_CLIENTE') {
+            this._productService.adicionarProduto(produto.id, quantidade);
+        }
     }
 
     filterProduct() {

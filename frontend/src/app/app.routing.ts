@@ -5,6 +5,8 @@ import { LayoutComponent } from 'app/layout/layout.component';
 import { InitialDataResolver } from 'app/app.resolvers';
 import { ProdutoListComponent } from './modules/user/produto-list/produto-list.component';
 import { CompactComponent } from './modules/user/compact/compact.component';
+import { PedidosFeitosListComponent } from './modules/admin/pedidos-feitos-list/pedidos-feitos-list.component';
+import { PedidoListComponent } from './modules/user/pedido-list/pedido-list.component';
 
 // @formatter:off
 /* eslint-disable max-len */
@@ -90,7 +92,9 @@ export const appRoutes: Route[] = [
         },
         children: [
             {path: 'example', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
-            {path: 'ecomerce', loadChildren: () => import('app/modules/admin/ecommerce/ecommerce.module').then(m => m.ECommerceModule)}
+            {path: 'ecomerce', loadChildren: () => import('app/modules/admin/ecommerce/ecommerce.module').then(m => m.ECommerceModule)},
+            {path: 'pedidos', component : PedidosFeitosListComponent},
+            
         ]
     },
 
@@ -105,6 +109,7 @@ export const appRoutes: Route[] = [
         },
         children: [
             {path: 'example', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
+            {path: 'meus-pedidos', component : PedidoListComponent},
         ]
     }
 ];
