@@ -65,6 +65,5 @@ public class DBService {
         usuarioRepository.save(u1);
         usuarioRepository.save(u2);
 
-
     }
 }

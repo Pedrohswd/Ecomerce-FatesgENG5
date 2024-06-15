@@ -95,6 +95,7 @@ export const appRoutes: Route[] = [
             {path: 'ecomerce', loadChildren: () => import('app/modules/admin/ecommerce/ecommerce.module').then(m => m.ECommerceModule)},
             {path: 'pedidos', component : PedidosFeitosListComponent},
             
+
         ]
     },
 
@@ -110,6 +111,7 @@ export const appRoutes: Route[] = [
         children: [
             {path: 'example', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
             {path: 'meus-pedidos', component : PedidoListComponent},
+
         ]
     }
 ];

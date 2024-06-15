@@ -6,6 +6,7 @@ import { UserService } from 'app/modules/user.service';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { Router } from '@angular/router';
 
+
 @Component({
     selector: 'app-produto-list',
     templateUrl: './produto-list.component.html',
@@ -59,6 +60,7 @@ export class ProdutoListComponent {
             this.filters.categorySlug$,
             this.filters.unidadeSlug$,
         ]).subscribe(([categorySlug]) => {
+
             // Reset the filtered courses
             this.productsFiltradas = this.products;
 

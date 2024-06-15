@@ -16,7 +16,6 @@ export class UserService {
     private _products: BehaviorSubject<Product[]> = new BehaviorSubject<
         Product[]
     >(null);
-
     private _pedidos: BehaviorSubject<Pedido[]> = new BehaviorSubject<Pedido[]>(
         null
     );
@@ -30,6 +29,7 @@ export class UserService {
     get pedidos$(): Observable<Pedido[]> {
         return this._pedidos.asObservable();
     }
+
 
     getCertificateById(eventId: any): Observable<any> {
         return this._products.pipe(
@@ -118,4 +118,5 @@ export class UserService {
                 }
             );
     }
+
 }
