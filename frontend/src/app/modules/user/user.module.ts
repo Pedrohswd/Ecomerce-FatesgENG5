@@ -22,6 +22,7 @@ import { PedidosFeitosListComponent } from '../admin/pedidos-feitos-list/pedidos
 
 @NgModule({
     declarations: [ProdutoListComponent, CompactComponent, PedidoListComponent, PedidosFeitosListComponent],
+
     imports: [
         MatButtonModule,
         MatFormFieldModule,
