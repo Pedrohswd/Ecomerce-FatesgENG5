@@ -6,7 +6,6 @@ import { UserService } from 'app/modules/user.service';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { Router } from '@angular/router';
 
-
 @Component({
     selector: 'app-produto-list',
     templateUrl: './produto-list.component.html',
