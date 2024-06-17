@@ -59,7 +59,6 @@ export class ProdutoListComponent {
             this.filters.categorySlug$,
             this.filters.unidadeSlug$,
         ]).subscribe(([categorySlug]) => {
-
             // Reset the filtered courses
             this.productsFiltradas = this.products;
 

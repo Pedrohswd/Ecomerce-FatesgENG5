@@ -30,7 +30,6 @@ export class UserService {
         return this._pedidos.asObservable();
     }
 
-
     getCertificateById(eventId: any): Observable<any> {
         return this._products.pipe(
             map((events: any[]) =>

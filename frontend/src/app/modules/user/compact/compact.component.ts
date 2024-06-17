@@ -7,6 +7,7 @@ import { UserService } from 'app/modules/user.service';
 import { Subscription } from 'rxjs';
 import { fadeInRight } from '@fuse/animations/fade';
 
+
 @Component({
     selector: 'app-compact',
     templateUrl: './compact.component.html',
@@ -29,7 +30,6 @@ export class CompactComponent implements OnInit {
 
     adicionarAoCarrinho(produto: Product, quantidade: number): void {
         this._userService.adicionarProduto(produto.id, quantidade);
-        
         window.location.reload()
     }
 
@@ -49,5 +49,4 @@ export class CompactComponent implements OnInit {
         );
         return parseFloat(total.toFixed(2));
     }
-
 }
