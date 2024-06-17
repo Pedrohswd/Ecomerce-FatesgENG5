@@ -16,11 +16,10 @@ export class UserService {
     private _products: BehaviorSubject<Product[]> = new BehaviorSubject<
         Product[]
     >(null);
-
     private _pedidos: BehaviorSubject<Pedido[]> = new BehaviorSubject<Pedido[]>(
         null
     );
-
+    
     constructor(private _httpClient: HttpClient) {}
 
     get products$(): Observable<Product[]> {
@@ -118,4 +117,5 @@ export class UserService {
                 }
             );
     }
+
 }

@@ -6,7 +6,7 @@
             <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
         </div>
         <!-- Title -->
-        <div class="text-4xl font-extrabold tracking-tight">Inventory</div>
+        <div class="text-4xl font-extrabold tracking-tight">Produtos</div>
         <!-- Actions -->
         <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
             <!-- Search -->
@@ -17,7 +17,7 @@
             <!-- Add product button -->
             <button class="ml-4" mat-flat-button [color]="'primary'" (click)="createProduct()">
                 <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
-                <span class="ml-2 mr-1">Add</span>
+                <span class="ml-2 mr-1">Adicionar</span>
             </button>
         </div>
     </div>
@@ -194,7 +194,8 @@
                                             <span class="ml-2">An error occurred, try again!</span>
                                         </ng-container>
                                     </div>
-                                    <button mat-flat-button [color]="'primary'" (click)="updateSelectedProduct()">Update</button>
+                                    <button class="text-white" mat-flat-button [color]="'primary'" (click)="updateSelectedProduct()">Atualizar produto</button>
+
                                 </div>
                             </div>
                         </form>
@@ -207,4 +208,5 @@
             </ng-template>
         </div>
     </div>
+
 </div>

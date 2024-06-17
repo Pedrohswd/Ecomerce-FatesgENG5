@@ -37,7 +37,7 @@ import { PedidosFeitosListComponent } from '../admin/pedidos-feitos-list/pedidos
         SharedModule,
         ToastrModule,
         MatPaginatorModule,
-        MatTableModule
+        MatTableModule,
 
     ],
 })
