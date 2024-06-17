@@ -19,11 +19,7 @@ export class UserService {
     private _pedidos: BehaviorSubject<Pedido[]> = new BehaviorSubject<Pedido[]>(
         null
     );
-
-    private _pedidos: BehaviorSubject<Pedido[]> = new BehaviorSubject<Pedido[]>(
-        null
-    );
-
+    
     constructor(private _httpClient: HttpClient) {}
 
     get products$(): Observable<Product[]> {

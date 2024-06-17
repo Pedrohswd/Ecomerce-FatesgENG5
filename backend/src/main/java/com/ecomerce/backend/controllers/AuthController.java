@@ -5,6 +5,7 @@ import com.ecomerce.backend.entities.dtos.LoginRequestDTO;
 import com.ecomerce.backend.entities.dtos.LoginResponseDTO;
 import com.ecomerce.backend.security.TokenService;
 import com.ecomerce.backend.services.UsuarioService;
+import com.ecomerce.backend.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,7 +25,8 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequestDTO body) {
         Usuario user = this.service.findByEmail(body.email());
-        if (body.senha().equals(user.getSenha())) {
+        String senha = Utils.hashPassword(body.senha());
+        if (senha.equals(user.getSenha())) {
             String token = this.tokenService.generateToken(user);
             return ResponseEntity.ok(new LoginResponseDTO(user.getEmail(), token));
         }

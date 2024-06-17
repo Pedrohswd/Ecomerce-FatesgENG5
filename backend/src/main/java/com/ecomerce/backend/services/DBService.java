@@ -3,6 +3,7 @@ package com.ecomerce.backend.services;
 import com.ecomerce.backend.entities.*;
 import com.ecomerce.backend.entities.enums.Perfil;
 import com.ecomerce.backend.repositories.*;
+import com.ecomerce.backend.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,10 +45,10 @@ public class DBService {
         ed1.setPessoa(p1);
         p1.setEndereco(ed1);
 
-        Usuario u1 = new Usuario(null, "admin@value.adm", "123");
+        Usuario u1 = new Usuario(null, "admin@value.adm", Utils.hashPassword("123"));
         u1.addPerfil(Perfil.ADMIN);
 
-        Usuario u2 = new Usuario(null, "pedrohsfwd@gmail.com", "123");
+        Usuario u2 = new Usuario(null, "pedrohsfwd@gmail.com", Utils.hashPassword("123"));
         u2.setPessoa(p1);
         u2.addPerfil(Perfil.CLIENTE);
 

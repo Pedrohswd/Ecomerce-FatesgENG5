@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Carrinho } from 'app/models/carrinho';
 import { CarrinhoItem } from 'app/models/carrinhoItem';
 import { Product } from 'app/models/product';
 import { UserService } from 'app/modules/user.service';
+import { Subscription } from 'rxjs';
+import { fadeInRight } from '@fuse/animations/fade';
 
 @Component({
     selector: 'app-compact',
@@ -11,7 +14,7 @@ import { UserService } from 'app/modules/user.service';
 export class CompactComponent implements OnInit {
     carrinho: Carrinho;
 
-    constructor(private _userService: UserService) {}
+    constructor(private _userService: UserService, private route: ActivatedRoute) {}
 
     ngOnInit(): void {
         this._userService.obterOuCriarCarrinho().subscribe(
@@ -27,18 +30,12 @@ export class CompactComponent implements OnInit {
     adicionarAoCarrinho(produto: Product, quantidade: number): void {
         this._userService.adicionarProduto(produto.id, quantidade);
         
-        this._userService.obterOuCriarCarrinho().subscribe(
-            (data) => {
-                this.carrinho = data;
-            },
-            (error) => {
-                console.error('Erro ao obter ou criar carrinho', error);
-            }
-        );
+        window.location.reload()
     }
 
     realizarPedido(){
         this._userService.gerarPedido()
+        window.location.reload()
     }
 
     getTotal(): number {
@@ -52,4 +49,5 @@ export class CompactComponent implements OnInit {
         );
         return parseFloat(total.toFixed(2));
     }
+
 }

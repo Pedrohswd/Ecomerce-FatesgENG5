@@ -1,5 +1,8 @@
 package com.ecomerce.backend.utils;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class Utils {
     public static boolean validarCNPJ(String cnpj) {
         // Remover caracteres não numéricos
@@ -93,5 +96,26 @@ public class Utils {
     public static String inserirMascara(String CPF) {
         CPF = CPF.replaceAll("[^0-9]", "");
         return CPF.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+    }
+
+    public static String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-512"); //1
+
+            byte[] hashedBytes = md.digest(password.getBytes()); //1
+
+            StringBuilder stringBuilder = new StringBuilder();//1
+            for (byte b : hashedBytes) { //n
+                stringBuilder.append(String.format("%02x", b));//1
+            }
+
+            return stringBuilder.toString(); //1
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();//1
+            return null; //1
+        }
+
+
     }
 }
