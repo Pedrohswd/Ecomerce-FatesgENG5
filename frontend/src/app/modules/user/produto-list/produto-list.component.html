@@ -74,7 +74,7 @@
                                     <div class="text-2x6 leading-tight">Descrição: {{product.description}}</div>
                                 </div>
                                 <hr class="border-b my-6">
-                                <div class="text-5x2 font-extrabold mt-2">R${{product.price}}</div>
+                                <div class="text-5x2 font-extrabold mt-2">{{product.price | currency:'BRL'}}</div>
                                 <div class="mt-6 -mx-8">
                                     <a
                                         mat-flat-button

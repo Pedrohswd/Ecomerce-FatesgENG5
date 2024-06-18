@@ -33,13 +33,13 @@
           <!-- Render Items -->
           <ng-container *ngFor="let item of carrinho.items">
             <div class="col-span-8 text-lg font-medium">{{ item.produto.name }}</div>
-            <div class="self-center text-right">{{ item.produto.price | currency }}</div>
+            <div class="self-center text-right">{{ item.produto.price | currency:'BRL'}}</div>
             <div class="self-center text-right flex items-center justify-center">
                 <button (click)="adicionarAoCarrinho(item.produto, -1)" class="px-2 py-1 bg-red-500 text-white rounded">-</button>
                 <span class="mx-2">{{ item.quantidade }}</span>
                 <button (click)="adicionarAoCarrinho(item.produto, 1)" class="px-2 py-1 bg-green-500 text-white rounded">+</button>
             </div>
-            <div class="col-span-2 self-center text-right">{{ (item.produto.price * item.quantidade) | currency }}</div>
+            <div class="col-span-2 self-center text-right">{{ (item.produto.price * item.quantidade) | currency:'BRL' }}</div>
 
             <!-- Divider -->
             <div class="col-span-12 my-4 border-b"></div>
@@ -67,7 +67,7 @@
 
           <!-- Total -->
           <div class="col-span-10 self-center text-2xl font-medium tracking-tight text-secondary">TOTAL</div>
-          <div class="col-span-2 text-right text-2xl font-medium">R$ {{ getTotal() }}</div>
+          <div class="col-span-2 text-right text-2xl font-medium">R$ {{ getTotal() | currency:'BRL'}}</div>
         </div>
         <div class="mt-16">
           <div class="font-medium">Clique para realizar o pedido</div>
