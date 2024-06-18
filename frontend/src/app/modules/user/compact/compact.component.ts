@@ -29,7 +29,7 @@ export class CompactComponent implements OnInit {
     }
 
     adicionarAoCarrinho(produto: Product, quantidade: number): void {
-        this._userService.adicionarProduto(produto.id, quantidade);
+        this._userService.atualizarProduto(produto.id, quantidade);
 
     }
 

@@ -1,3 +1,4 @@
+import { products } from './../mock-api/apps/ecommerce/inventory/data';
 import { API_CONFIG } from './../core/config/API_CONFIG';
 import { Carrinho } from './../models/carrinho';
 import { HttpClient } from '@angular/common/http';
@@ -93,6 +94,29 @@ export class UserService {
             .subscribe(
                 (response) => {
                     notyf.success('Item atualizado no carrinho');
+                },
+                (error) => {
+                    notyf.error('Erro ao adicionar ao carrinho');
+                }
+            );
+    }
+
+    atualizarProduto(produtoId: number, quantidade: number): void {
+        const usuarioEmail = AuthUtils.getUserEmail();
+        this._httpClient
+            .post<Carrinho>(
+                `${API_CONFIG.baseUrl}/api/carrinho/${usuarioEmail}/adicionar/${produtoId}`,
+                null,
+                {
+                    params: {
+                        quantidade: quantidade.toString(),
+                    },
+                    responseType: 'json',
+                }
+            )
+            .subscribe(
+                (response) => {
+                    notyf.success('Item atualizado no carrinho');
                     window.location.reload()
                 },
                 (error) => {
@@ -113,7 +137,7 @@ export class UserService {
             .subscribe(
                 (response) => {
                     notyf.success('Pedido realizado com sucesso!');
-                    this._router.navigate(['sign-in']);
+                    this._router.navigate(['meus-pedidos']);
                 },
                 (error) => {
                     notyf.error('Erro ao realizar pedido pedido:');
