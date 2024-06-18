@@ -30,12 +30,11 @@ export class CompactComponent implements OnInit {
 
     adicionarAoCarrinho(produto: Product, quantidade: number): void {
         this._userService.adicionarProduto(produto.id, quantidade);
-        window.location.reload()
+
     }
 
     realizarPedido(){
         this._userService.gerarPedido()
-        window.location.reload()
     }
 
     getTotal(): number {

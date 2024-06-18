@@ -2,9 +2,9 @@ import { API_CONFIG } from './../core/config/API_CONFIG';
 import { Carrinho } from './../models/carrinho';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import notyf from 'app/core/config/utils';
-import { CarrinhoItem } from 'app/models/carrinhoItem';
 import { Pedido } from 'app/models/pedido';
 import { Product } from 'app/models/product';
 import { Toast, ToastrService } from 'ngx-toastr';
@@ -21,7 +21,7 @@ export class UserService {
         null
     );
 
-    constructor(private _httpClient: HttpClient) {}
+    constructor(private _httpClient: HttpClient,        private _router: Router) {}
 
     get products$(): Observable<Product[]> {
         return this._products.asObservable();
@@ -93,6 +93,7 @@ export class UserService {
             .subscribe(
                 (response) => {
                     notyf.success('Item atualizado no carrinho');
+                    window.location.reload()
                 },
                 (error) => {
                     notyf.error('Erro ao adicionar ao carrinho');
@@ -112,6 +113,7 @@ export class UserService {
             .subscribe(
                 (response) => {
                     notyf.success('Pedido realizado com sucesso!');
+                    this._router.navigate(['sign-in']);
                 },
                 (error) => {
                     notyf.error('Erro ao realizar pedido pedido:');
