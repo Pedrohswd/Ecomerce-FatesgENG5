@@ -16,6 +16,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { AuthService } from 'app/core/auth/auth.service';
 import { Pessoa } from 'app/models/pessoa';
 import { Usuario } from 'app/models/usuario';
+import notyf from 'app/core/config/utils';
 
 @Component({
     selector: 'auth-sign-up',
@@ -102,6 +103,7 @@ export class AuthSignUpComponent implements OnInit {
                 this._authService
                     .signUpUser(usuario)
                     .subscribe((response) => {});
+                notyf.success('Usuário cadastrado com sucesso!')
                 this._router.navigate(['sign-in']);
             },
             (ex) => {
@@ -109,6 +111,7 @@ export class AuthSignUpComponent implements OnInit {
                     ex.error.errors.forEach((element) => {
                         this._toast.error(element.message);
                     });
+                    notyf.error('Usuário não cadastrado!')
                 } else {
                     this._toast.error(ex.error.message);
                 }

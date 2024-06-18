@@ -5,6 +5,7 @@ import { BehaviorSubject, Subject, combineLatest, takeUntil } from 'rxjs';
 import { UserService } from 'app/modules/user.service';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { Router } from '@angular/router';
+import notyf from 'app/core/config/utils';
 
 @Component({
     selector: 'app-produto-list',

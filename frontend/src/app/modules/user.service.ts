@@ -3,6 +3,7 @@ import { Carrinho } from './../models/carrinho';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthUtils } from 'app/core/auth/auth.utils';
+import notyf from 'app/core/config/utils';
 import { CarrinhoItem } from 'app/models/carrinhoItem';
 import { Pedido } from 'app/models/pedido';
 import { Product } from 'app/models/product';
@@ -19,7 +20,7 @@ export class UserService {
     private _pedidos: BehaviorSubject<Pedido[]> = new BehaviorSubject<Pedido[]>(
         null
     );
-    
+
     constructor(private _httpClient: HttpClient) {}
 
     get products$(): Observable<Product[]> {
@@ -91,10 +92,10 @@ export class UserService {
             )
             .subscribe(
                 (response) => {
-                    console.log('Produto adicionado com sucesso:', response);
+                    notyf.success('Item atualizado no carrinho');
                 },
                 (error) => {
-                    console.error('Erro ao adicionar produto:', error);
+                    notyf.error('Erro ao adicionar ao carrinho');
                 }
             );
     }
@@ -110,12 +111,11 @@ export class UserService {
             })
             .subscribe(
                 (response) => {
-                    console.log('Pedido realizado com sucesso:', response);
+                    notyf.success('Pedido realizado com sucesso!');
                 },
                 (error) => {
-                    console.error('Erro ao adicionar pedido:', error);
+                    notyf.error('Erro ao realizar pedido pedido:');
                 }
             );
     }
-
 }
