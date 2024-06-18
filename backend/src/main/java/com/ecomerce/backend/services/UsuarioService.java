@@ -5,6 +5,7 @@ import com.ecomerce.backend.entities.dtos.UsuarioDTO;
 import com.ecomerce.backend.repositories.UsuarioRepository;
 import com.ecomerce.backend.services.exceptions.DataIntegrityViolationException;
 import com.ecomerce.backend.services.exceptions.ObjectnotFoundException;
+import com.ecomerce.backend.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class UsuarioService {
         validaPorEmail(usuarioDTO);
         Usuario usuario = new Usuario(usuarioDTO);
         usuario.setPessoa(pessoaService.findByCpf(usuarioDTO.getCpf()));
+        usuario.setSenha(Utils.hashPassword(usuarioDTO.getSenha()));
         usuario = repository.save(usuario);
         return usuario;
     }

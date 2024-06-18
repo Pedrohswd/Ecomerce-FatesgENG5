@@ -25,8 +25,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequestDTO body) {
         Usuario user = this.service.findByEmail(body.email());
-        String senha = Utils.hashPassword(body.senha());
-        if (senha.equals(user.getSenha())) {
+        if (Utils.hashPassword(body.senha()).equals(user.getSenha())) {
             String token = this.tokenService.generateToken(user);
             return ResponseEntity.ok(new LoginResponseDTO(user.getEmail(), token));
         }
