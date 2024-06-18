@@ -54,7 +54,7 @@
                                     <!-- Image -->
                                     <div class="flex items-center">
                                         <div class="relative flex flex-0 items-center justify-center w-12 h-12 mr-6 rounded overflow-hidden border">
-                                            <img class="w-8" *ngIf="product.image" [alt]="'Product image'" [src]="product.image">
+                                            <img class="w-8" *ngIf="product.image" [alt]="'Product image'" [src]="product.image ? 'data:image/png;base64,' + product.image : 'assets/images/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg'">
                                             <div class="flex items-center justify-center w-full h-full text-xs font-semibold leading-none text-center uppercase" *ngIf="!product.image">
                                                 NO IMAGE
                                             </div>
@@ -121,12 +121,10 @@
                                 <div class="flex flex-col items-center sm:items-start mb-8 sm:mb-0">
                                     <div class="flex flex-col items-center">
                                         <div class="w-32 h-44 border rounded overflow-hidden">
-                                            <ng-container *ngIf="selectedProductForm.get('image').value; else noImage">
-                                                <img class="w-full h-full object-cover" [src]="selectedProductForm.get('image').value">
+                                            <ng-container>
+                                                <img class="w-full h-full object-cover" [src]="selectedProduct.image ? 'data:image/png;base64,' + product.image : 'assets/images/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg'">
+                                                
                                             </ng-container>
-                                            <ng-template #noImage>
-                                                <span class="flex items-center min-h-20 text-lg font-semibold">NO IMAGE</span>
-                                            </ng-template>
                                         </div>
                                         <div class="flex flex-col mt-8">
                                             <span class="font-semibold mb-2">Product status</span>
@@ -175,7 +173,7 @@
 
                                     <!-- Image Upload -->
                                     <div class="flex flex-col w-full lg:w-1/6 sm:pl-8">
-                                        <input #pngInput hidden="true" type="file" [formControlName]="'image'" (change)="onFileSelected($event)" accept=".png"/>
+                                        <input #pngInput hidden="true" type="file" (change)="onFileSelected($event)" accept=".png"/>
                                         <button mat-flat-button color="accent" (click)="pngInput.click()">Adicione uma imagem(PNG)</button>
                                     </div>
                                 </div>

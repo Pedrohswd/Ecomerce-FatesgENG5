@@ -39,15 +39,10 @@ public class CarrinhoService {
 
         Carrinho carrinho = usuario.getCarrinho();
         if (carrinho == null) {
-            carrinho = new Carrinho();
-            carrinho.setUsuario(usuario);
-            usuario.setCarrinho(carrinho);
-            carrinho.setItems(new ArrayList<>());
+            carrinho = new Carrinho(null, new ArrayList<>(),usuario);
             carrinho = carrinhoRepository.save(carrinho);
             usuario.setCarrinho(carrinho);
             usuarioRepository.save(usuario);
-            usuario = usuarioRepository.findByEmail(usuarioEmail).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-            usuario.setCarrinho(carrinho);
         }
         return carrinho;
     }

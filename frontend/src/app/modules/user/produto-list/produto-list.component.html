@@ -48,7 +48,7 @@
             <ng-container *ngIf="this.productsFiltradas; else noCourses">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 sm:mt-10">
                     <ng-container *ngFor="let product of productsFiltradas; trackBy: trackByFn">
-                        <fuse-card class="flex flex-col max-w-80 w-full filter-shopping">
+                        <fuse-card *ngIf="product.status === true && product.quantity > 0" class="flex flex-col max-w-80 w-full filter-shopping">
                             <div class="relative">
                                 <div class="absolute flex flex-col top-0 right-0 p-3">
                                     <button mat-icon-button>
@@ -64,7 +64,7 @@
                                 </div>
                                 <img
                                     class="object-cover"
-                                    [src]="'assets/images/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg'"
+                                    [src]="product.image ? 'data:image/png;base64,' + product.image : 'assets/images/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg'"
                                     alt="Card cover image">
                             </div>
                             <div class="m-8 mb-0">

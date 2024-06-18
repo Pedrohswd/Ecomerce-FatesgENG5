@@ -28,4 +28,12 @@ public class Carrinho {
     @JsonIgnore
     private Usuario usuario;
 
+    public Carrinho(){
+
+    }
+
+    public Carrinho(Long id, List<Item> items, Usuario usuario){
+
+    }
+
 }

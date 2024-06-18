@@ -121,7 +121,6 @@ export class InventoryListComponent
      * On init
      */
     ngOnInit(): void {
-        
         // Create the selected product form
         this.selectedProductForm = this._formBuilder.group({
             id: [''],
@@ -303,6 +302,22 @@ export class InventoryListComponent
         );
     }
 
+    onFileSelected(event: Event): void {
+        const input = event.target as HTMLInputElement;
+
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            const reader = new FileReader();
+
+            reader.onload = () => {
+                const base64String = (reader.result as string).split(',')[1];
+                this.selectedProductForm.get('image').setValue(base64String);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
+
     /**
      * Create product
      */
@@ -314,6 +329,7 @@ export class InventoryListComponent
 
             // Fill the form
             this.selectedProductForm.patchValue(newProduct);
+            this
 
             // Mark for check
             this._changeDetectorRef.markForCheck();
